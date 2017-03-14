@@ -46,7 +46,7 @@ data/labels.pickle: scripts/create_labels.py $(TRAINER_CORPUS)/driver.py
 	$(py)
 
 data/vectorizer.pickle: data/trainers.pickle
-data/trainers.pickle: scripts/vectorize_trainers.py $(TRAINER_CORPUS)/driver.py data/target_corpus.timestamp
+data/trainers.pickle: scripts/vectorize_trainers.py $(TRAINER_CORPUS)/driver.py
 	$(py) --vectorizer_outfile data/vectorizer.pickle
 
 $(RESULTS): scripts/estimate.py data/vectorizer.pickle data/model.pickle $(TARGET_CORPUS)/driver.py
