@@ -11,6 +11,7 @@ import logging
 
 import sklearn.feature_extraction
 import quantgov
+import quantgov.estimator
 
 from pathlib import Path
 from sklearn.externals import joblib as jl
@@ -40,14 +41,18 @@ def vectorize_trainers(streamer):
     # details on using CountVectorizer
     vectorizer = sklearn.feature_extraction.text.CountVectorizer()
     X = vectorizer.fit_transform(doc.text for doc in streamer)
-    return (tuple(streamer.index), X), vectorizer
+    trainers = quantgov.estimator.Trainers(
+        index=tuple(streamer.index),
+        vectors=X
+    )
+    return trainers, vectorizer
 
 
 def parse_args():
     """Parse command line arguments."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('corpus', type=Path)
-    parser.add_argument('-o', '--trainer_outfile')
+    parser.add_argument('-o', '--trainers_outfile')
     parser.add_argument('--vectorizer_outfile')
     verbosity = parser.add_mutually_exclusive_group()
     verbosity.add_argument('-v', '--verbose', action='store_const',
@@ -62,7 +67,7 @@ def main():
     logging.basicConfig(level=args.verbose)
     driver = quantgov.load_driver(args.corpus)
     trainers, vectorizer = vectorize_trainers(driver.get_streamer())
-    jl.dump(trainers, args.trainer_outfile)
+    trainers.save(args.trainers_outfile)
     jl.dump(vectorizer, args.vectorizer_outfile)
 
 
