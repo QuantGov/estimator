@@ -43,7 +43,7 @@ rule default:
 rule vectorize_trainers:
     input:
         'scripts/vectorize_trainers.py',
-        trainer_corpus('driver.py')
+        trainer_corpus('corpus_timestamp')
     output:
         vectorizer=outpath('data/vectorizer.pickle'),
         trainers=outpath('data/trainers.pickle')
