@@ -53,7 +53,7 @@ rule vectorize_trainers:
 rule create_labels:
     input:
         'scripts/create_labels.py',
-        config['trainer_corpus']
+        trainer_corpus('driver.py')
     output:
         outpath('data/labels.pickle')
     shell:
