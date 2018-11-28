@@ -11,7 +11,7 @@ import logging
 
 import sklearn.feature_extraction
 import quantgov
-import quantgov.estimator
+import quantgov.ml
 
 from pathlib import Path
 from sklearn.externals import joblib as jl
@@ -41,7 +41,7 @@ def vectorize_trainers(streamer):
     # details on using CountVectorizer
     vectorizer = sklearn.feature_extraction.text.CountVectorizer()
     X = vectorizer.fit_transform(doc.text for doc in streamer)
-    trainers = quantgov.estimator.Trainers(
+    trainers = quantgov.ml.Trainers(
         index=tuple(streamer.index),
         vectors=X
     )
