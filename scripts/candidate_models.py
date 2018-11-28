@@ -1,3 +1,3 @@
-import quantgov.estimator.candidate_sets
+import quantgov.ml.candidate_sets
 
-models = quantgov.estimator.candidate_sets.classification
+models = quantgov.ml.candidate_sets.classification

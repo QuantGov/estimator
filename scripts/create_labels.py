@@ -4,7 +4,7 @@ import argparse
 import random
 import logging
 
-import quantgov.estimator
+import quantgov.ml
 
 from pathlib import Path
 
@@ -18,13 +18,13 @@ def create_label(streamer):
     Arguments:
     * streamer: a quantgov.corpora.CorpusStreamer object
 
-    Returns: a quantgov.estimator.Labels object
+    Returns: a quantgov.ml.Labels object
 
     """
     label_names = ('randomly_true',)
     labels = tuple(random.choice([True, False]) for doc in streamer)
 
-    return quantgov.estimator.Labels(
+    return quantgov.ml.Labels(
         index=tuple(streamer.index),
         label_names=label_names,
         labels=labels
