@@ -14,7 +14,7 @@ import quantgov
 import quantgov.ml
 
 from pathlib import Path
-from sklearn.externals import joblib as jl
+import joblib as jl
 
 ENCODE_IN = 'utf-8'
 ENCODE_OUT = 'utf-8'
